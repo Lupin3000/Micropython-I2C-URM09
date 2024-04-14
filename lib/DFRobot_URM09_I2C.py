@@ -7,6 +7,9 @@ URM09_I2C_ADDR = const(0x11)
 
 
 class DFRobot_URM09_I2C:
+    """
+    MicroPython class for communication with the URM09 Ultrasonic Sensor from DFRobot via I2C
+    """
 
     MEASURE_MODE_PASSIVE = const(0x00)
     MEASURE_MODE_AUTOMATIC = const(0x80)
@@ -25,7 +28,7 @@ class DFRobot_URM09_I2C:
 
     def __init__(self, sda, scl, i2c_addr=URM09_I2C_ADDR, i2c_bus=0):
         """
-        Initialize the DF2301Q I2C communication
+        Initialize the URM09 I2C communication
         :param sda: I2C SDA pin
         :param scl: I2C SCL pin
         :param i2c_addr: I2C address
@@ -71,7 +74,7 @@ class DFRobot_URM09_I2C:
 
     def set_mode_range(self, mode: int, distance_range: int) -> None:
         """
-        Sets mode (MEASURE_MODE_PASSIVE or MEASURE_MODE_AUTOMATIC) and distance range
+        Sets operation mode (MEASURE_MODE_PASSIVE or MEASURE_MODE_AUTOMATIC) and distance range
 
         MEASURE_RANG_150 = 150 cm
         MEASURE_RANG_300 = 300 cm
@@ -93,7 +96,7 @@ class DFRobot_URM09_I2C:
 
     def get_temperature(self) -> float:
         """
-        Get temperature
+        Get temperature in degrees Celsius
         :return: degree celsius as float
         """
         result = self._read_reg(self.TEMP_H_INDEX, 2)
@@ -105,7 +108,7 @@ class DFRobot_URM09_I2C:
 
     def get_distance(self) -> int:
         """
-        Get distance
+        Get distance in cm
         :return: cm as integer
         """
         sleep_ms(self.DELAY_MEASURE)
